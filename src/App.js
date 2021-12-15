@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { useMoralis } from 'react-moralis'
 
 function App() {
-  return (
+
+  const { authenticate, isAuthenticated, user } = useMoralis();
+  console.log(user.id);
+  console.log(user.attributes['ethAddress']);
+  return isAuthenticated ? (<div> <h1>Hi bro</h1></div>) : (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => authenticate()}>Authenticate</button>
     </div>
   );
 }
