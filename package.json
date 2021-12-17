@@ -2,6 +2,7 @@
   "name": "giftomatic",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://tusharojha.github.io/giftomatic",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
@@ -32,7 +33,9 @@
     "test": "react-scripts test",
     "cypress": "cypress open",
     "eject": "react-scripts eject",
-    "server": "json-server --watch server/db.json"
+    "server": "json-server --watch server/db.json",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
@@ -53,6 +56,7 @@
     ]
   },
   "devDependencies": {
-    "cypress-cucumber-preprocessor": "^4.3.0"
+    "cypress-cucumber-preprocessor": "^4.3.0",
+    "gh-pages": "^3.2.3"
   }
 }
