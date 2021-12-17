@@ -1,22 +1,13 @@
-import { Card, CardTitle, CardText, Button } from "reactstrap";
+import "./item.css";
 
 export const Item = () => {
   return (
-    <div>
-      <Card
-        body
-        inverse
-        style={{
-          backgroundColor: "#333",
-          borderColor: "#333",
-        }}
-      >
-        <CardTitle tag="h5">Team OpenSeas</CardTitle>
-        <CardText>
-          Help Mr.Beast and team to make the water bodies cleaner!
-        </CardText>
-        <Button>View Details</Button>
-      </Card>
+    <div className="itemTile">
+      <h5 className="donationTitle">Team OpenSeas</h5>
+      <p className="donationDescription">
+        Help Mr.Beast and team to make the water bodies cleaner!
+      </p>
+      <button className="button">View Details</button>
     </div>
   );
 };

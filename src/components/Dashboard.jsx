@@ -59,7 +59,13 @@ const Dashboard = () => {
           }} disabled> Create Campaign </button>
         </div>
         <br />
-        <Item />
+        <div className="items">
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+        </div>
       </div>
     </div>
   );
