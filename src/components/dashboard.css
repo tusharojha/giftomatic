@@ -74,4 +74,8 @@
     .userDetails {
         flex-direction: column;
     }
+
+    .items {
+        grid-template-columns: 100%;
+    }
 }
