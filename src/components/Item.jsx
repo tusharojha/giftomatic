@@ -1,6 +1,6 @@
 import "./item.css";
 
-export const Item = () => {
+export const Item = ({ showDetails }) => {
   return (
     <div className="itemTile">
       <h5 className="donationTitle">Team OpenSeas
@@ -10,7 +10,7 @@ export const Item = () => {
       <p className="donationDescription">
         Help Mr.Beast and team to make the water bodies cleaner!
       </p>
-      <button className="button">View Details</button>
+      <button onClick={() => showDetails()} className="button">View Details</button>
     </div>
   );
 };

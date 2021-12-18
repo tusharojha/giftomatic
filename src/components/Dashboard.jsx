@@ -1,18 +1,32 @@
 import { Item } from "./Item";
 
 import { useMoralis } from "react-moralis";
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ethers } from "ethers"
-import abi from "./../abi/abi.json"
 
 import "./dashboard.css";
+import ModalView from "./ModalView";
+import CreateCampaign from "./CreateCampaign";
 import { CONTRACT_ADDRESS } from "../credentials";
 
 const Dashboard = () => {
   const { user, logout } = useMoralis();
   let provider
   let signer
-  const contractAddress = CONTRACT_ADDRESS
+  // const contractAddress = CONTRACT_ADDRESS
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+
+  function openModal(state) {
+    setShowDetailsModal(state);
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   useEffect(() => {
     provider = new ethers.providers.Web3Provider(window.ethereum)
     signer = provider.getSigner()
@@ -41,32 +55,34 @@ const Dashboard = () => {
           <h2 className="heading">Your Campaigns</h2>
 
           <button className="button" onClick={async () => {
-            const metapass = new ethers.Contract(contractAddress, abi, signer)
-            let txn = await metapass.createCampaign(
-              'title',
-              'description',
-              100,
-              0,
-              'image',
-              'link',
-            )
+            openModal(false)
+            // const metapass = new ethers.Contract(contractAddress, abi, signer)
+            // let txn = await metapass.createCampaign(
+            //   'title',
+            //   'description',
+            //   100,
+            //   0,
+            //   'image',
+            //   'link',
+            // )
 
-            await txn.wait()
+            // await txn.wait()
 
-            metapass.on('campaignCreation', (res) => {
-              console.log(res)
-            })
-          }} disabled> Create Campaign </button>
+            // metapass.on('campaignCreation', (res) => {
+            //   console.log(res)
+            // })
+          }}> Create Campaign </button>
         </div>
         <br />
         <div className="items">
-          <Item />
+          <Item showDetails={() => openModal(true)} />
           <Item />
           <Item />
           <Item />
           <Item />
         </div>
       </div>
+      <ModalView isDetails={showDetailsModal} modalIsOpen={modalIsOpen} closeModal={() => closeModal()} />
     </div>
   );
 };
