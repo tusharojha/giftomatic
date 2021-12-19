@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/giftomatic/static/css/main.85af9a77.chunk.css",
-    "main.js": "/giftomatic/static/js/main.5918f8c4.chunk.js",
-    "main.js.map": "/giftomatic/static/js/main.5918f8c4.chunk.js.map",
+    "main.css": "/giftomatic/static/css/main.71734173.chunk.css",
+    "main.js": "/giftomatic/static/js/main.e927f018.chunk.js",
+    "main.js.map": "/giftomatic/static/js/main.e927f018.chunk.js.map",
     "runtime-main.js": "/giftomatic/static/js/runtime-main.ed5fb52d.js",
     "runtime-main.js.map": "/giftomatic/static/js/runtime-main.ed5fb52d.js.map",
-    "static/js/2.ed38604d.chunk.js": "/giftomatic/static/js/2.ed38604d.chunk.js",
-    "static/js/2.ed38604d.chunk.js.map": "/giftomatic/static/js/2.ed38604d.chunk.js.map",
+    "static/js/2.32f31d5a.chunk.js": "/giftomatic/static/js/2.32f31d5a.chunk.js",
+    "static/js/2.32f31d5a.chunk.js.map": "/giftomatic/static/js/2.32f31d5a.chunk.js.map",
     "index.html": "/giftomatic/index.html",
-    "static/css/main.85af9a77.chunk.css.map": "/giftomatic/static/css/main.85af9a77.chunk.css.map",
-    "static/js/2.ed38604d.chunk.js.LICENSE.txt": "/giftomatic/static/js/2.ed38604d.chunk.js.LICENSE.txt",
+    "static/css/main.71734173.chunk.css.map": "/giftomatic/static/css/main.71734173.chunk.css.map",
+    "static/js/2.32f31d5a.chunk.js.LICENSE.txt": "/giftomatic/static/js/2.32f31d5a.chunk.js.LICENSE.txt",
     "static/media/gift1.e95e42bb.png": "/giftomatic/static/media/gift1.e95e42bb.png"
   },
   "entrypoints": [
     "static/js/runtime-main.ed5fb52d.js",
-    "static/js/2.ed38604d.chunk.js",
-    "static/css/main.85af9a77.chunk.css",
-    "static/js/main.5918f8c4.chunk.js"
+    "static/js/2.32f31d5a.chunk.js",
+    "static/css/main.71734173.chunk.css",
+    "static/js/main.e927f018.chunk.js"
   ]
 }
