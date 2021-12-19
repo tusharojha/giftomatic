@@ -27,3 +27,13 @@ textarea {
     height: 80px;
     width: 300px;
 }
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.left {
+    justify-content: left;
+    align-items: flex-start;
+}
