@@ -1,14 +1,14 @@
 import "./item.css";
 
-export const Item = ({ showDetails }) => {
+export const Item = ({ item, showDetails }) => {
+  const completed = (parseInt(item['targetAmount']) <= parseInt(item['collectedAmount']));
   return (
     <div className="itemTile">
-      <h5 className="donationTitle">Team OpenSeas
-        <div className="status running">Running</div>
-        {/* <div className="status completed">Completed</div> */}
+      <h5 className="donationTitle"> {item['title']}
+        {completed ? <div className="status completed">Completed</div> : <div className="status running">Running</div>}
       </h5>
       <p className="donationDescription">
-        Help Mr.Beast and team to make the water bodies cleaner!
+        {item['description']}
       </p>
       <button onClick={() => showDetails()} className="button">View Details</button>
     </div>

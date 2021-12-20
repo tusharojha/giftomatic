@@ -25,12 +25,12 @@ input, textarea {
 
 textarea {
     height: 80px;
-    width: 300px;
 }
 
 .link {
     text-decoration: none;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .left {

@@ -2,23 +2,27 @@ import { Item } from "./Item";
 
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react"
-import { ethers } from "ethers"
+import Modal from 'react-modal';
 
 import "./dashboard.css";
 import ModalView from "./ModalView";
-import CreateCampaign from "./CreateCampaign";
+import abi from "../abi/abi.json";
+// import CreateCampaign from "./CreateCampaign";
 import { CONTRACT_ADDRESS } from "../credentials";
 
 const Dashboard = () => {
-  const { user, logout } = useMoralis();
-  let provider
-  let signer
-  // const contractAddress = CONTRACT_ADDRESS
+  const { user, logout, Moralis } = useMoralis();
+  const contractAddress = CONTRACT_ADDRESS;
 
+  const [campaigns, setCampaigns] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
 
-  function openModal(state) {
+  Modal.setAppElement('body');
+
+  function openModal(state, data) {
+    setSelectedCampaign(data);
     setShowDetailsModal(state);
     setIsOpen(true);
   }
@@ -28,9 +32,26 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    provider = new ethers.providers.Web3Provider(window.ethereum)
-    signer = provider.getSigner()
-    console.log(signer)
+    const loadAllCampaigns = async () => {
+      await Moralis.enableWeb3();
+      const options = {
+        contractAddress: CONTRACT_ADDRESS,
+        functionName: "getAllCampaigns",
+        abi: abi,
+        params: {
+          owner: user.get('ethAddress')
+        }
+      };
+      try {
+
+        const receipt = await Moralis.executeFunction(options);
+        if (receipt !== undefined)
+          setCampaigns(receipt)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    loadAllCampaigns()
   }, [])
 
   return (
@@ -55,34 +76,17 @@ const Dashboard = () => {
           <h2 className="heading">Your Campaigns</h2>
 
           <button className="button" onClick={async () => {
-            openModal(false)
-            // const metapass = new ethers.Contract(contractAddress, abi, signer)
-            // let txn = await metapass.createCampaign(
-            //   'title',
-            //   'description',
-            //   100,
-            //   0,
-            //   'image',
-            //   'link',
-            // )
-
-            // await txn.wait()
-
-            // metapass.on('campaignCreation', (res) => {
-            //   console.log(res)
-            // })
+            openModal(false, null);
           }}> Create Campaign </button>
         </div>
         <br />
         <div className="items">
-          <Item showDetails={() => openModal(true)} />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          {campaigns.map((item, index) => {
+            return <Item key={index} item={item} showDetails={() => openModal(true, item)} />;
+          })}
         </div>
       </div>
-      <ModalView isDetails={showDetailsModal} modalIsOpen={modalIsOpen} closeModal={() => closeModal()} />
+      <ModalView selectedCampaign={selectedCampaign} isDetails={showDetailsModal} modalIsOpen={modalIsOpen} closeModal={() => closeModal()} />
     </div>
   );
 };

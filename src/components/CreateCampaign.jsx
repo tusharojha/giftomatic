@@ -9,13 +9,13 @@ const CreateCampaign = ({ modalIsOpen, closeModal }) => {
     const [imageURL, setImageURL] = useState("");
     const [associatedLink, setAssociatedLink] = useState("");
     const [targetAmount, setTargetAmount] = useState(0.0);
-
     return <div className="dataForm">
-        <input value={title} onChange={(e) => setTitle(e.value)} className="textfield" placeholder="Title" />
-        <textarea value={description} onChange={(e) => setDescription(e.value)} className="textfield" placeholder="Description" />
-        <input value={imageURL} onChange={(e) => setImageURL(e.value)} className="textfield" placeholder="Image URL" />
-        <input value={associatedLink} onChange={(e) => setAssociatedLink(e.value)} className="textfield" placeholder="Associated Link" />
-        <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(e.value)} className="textfield" placeholder="Target Amount (in ETH)" />
+        <input value={title} onChange={(e) => setTitle(e.target.value)} className="textfield" placeholder="Title" />
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="textfield" placeholder="Description" />
+        <input value={imageURL} onChange={(e) => setImageURL(e.target.value)} className="textfield" placeholder="Image URL" />
+        <input value={associatedLink} onChange={(e) => setAssociatedLink(e.target.value)} className="textfield" placeholder="Associated Link" />
+        <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} className="textfield" />
+        <p style={{ marginLeft: 10 }} className="donationTitle">Target Amount (in ETH): {targetAmount}</p>
         <button className="button">Submit</button>
     </div>;
 }

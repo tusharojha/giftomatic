@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from 'react-modal';
 
 import "./campaign.css";
@@ -7,6 +7,7 @@ import Details from "./Details";
 
 const customStyles = {
     content: {
+        width: "50%",
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -19,7 +20,7 @@ const customStyles = {
     },
 };
 
-const ModalView = ({ isDetails, modalIsOpen, closeModal }) => {
+const ModalView = ({ selectedCampaign, isDetails, modalIsOpen, closeModal }) => {
 
     return <Modal
         isOpen={modalIsOpen}
@@ -31,7 +32,7 @@ const ModalView = ({ isDetails, modalIsOpen, closeModal }) => {
             <button style={{ border: 0, backgroundColor: '#fff', fontSize: 18 }} onClick={closeModal}>X</button>
         </div>
         <h2 className="heading"> {isDetails ? "View Details" : "Create Campaign"}</h2>
-        {isDetails ? <Details /> : <CreateCampaign />}
+        {isDetails ? <Details campaign={selectedCampaign} /> : <CreateCampaign />}
     </Modal>;
 }
 
