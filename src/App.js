@@ -13,7 +13,7 @@ import CampaignScreen from "./components/CampaignScreen";
 function App() {
 
   const { isAuthenticated } = useMoralis();
-
+  console.log(process.env.CONTRACT_ADDRESS)
   return <Router>
     <Switch>
       <Route path={`/:userToken/:id`}>
