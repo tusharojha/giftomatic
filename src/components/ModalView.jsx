@@ -20,7 +20,7 @@ const customStyles = {
     },
 };
 
-const ModalView = ({ selectedCampaign, isDetails, modalIsOpen, closeModal }) => {
+const ModalView = ({ selectedId, selectedCampaign, isDetails, modalIsOpen, closeModal }) => {
 
     return <Modal
         isOpen={modalIsOpen}
@@ -32,7 +32,7 @@ const ModalView = ({ selectedCampaign, isDetails, modalIsOpen, closeModal }) => 
             <button style={{ border: 0, backgroundColor: '#fff', fontSize: 18 }} onClick={closeModal}>X</button>
         </div>
         <h2 className="heading"> {isDetails ? "View Details" : "Create Campaign"}</h2>
-        {isDetails ? <Details campaign={selectedCampaign} /> : <CreateCampaign closeModal={closeModal} />}
+        {isDetails ? <Details selectedId={selectedId} campaign={selectedCampaign} closeModal={closeModal} /> : <CreateCampaign closeModal={closeModal} />}
     </Modal>;
 }
 

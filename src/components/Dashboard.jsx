@@ -12,8 +12,8 @@ import { CONTRACT_ADDRESS } from "../credentials";
 
 const Dashboard = () => {
   const { user, logout, Moralis } = useMoralis();
-  const contractAddress = CONTRACT_ADDRESS;
 
+  const [selectedId, setSelectedId] = useState(-1);
   const [campaigns, setCampaigns] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -84,11 +84,14 @@ const Dashboard = () => {
         <br />
         <div className="items">
           {campaigns.map((item, index) => {
-            return <Item key={index} item={item} showDetails={() => openModal(true, item)} />;
+            return <Item key={index} item={item} showDetails={() => {
+              setSelectedId(index);
+              openModal(true, item);
+            }} />;
           })}
         </div>
       </div>
-      <ModalView selectedCampaign={selectedCampaign} isDetails={showDetailsModal} modalIsOpen={modalIsOpen} closeModal={() => closeModal()} />
+      <ModalView selectedId={selectedId} selectedCampaign={selectedCampaign} isDetails={showDetailsModal} modalIsOpen={modalIsOpen} closeModal={() => closeModal()} />
     </div>
   );
 };
