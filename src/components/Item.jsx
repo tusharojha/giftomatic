@@ -8,7 +8,7 @@ export const Item = ({ item, showDetails }) => {
         {completed ? <div className="status completed">Completed</div> : <div className="status running">Running</div>}
       </h5>
       <p className="donationDescription">
-        {item['description']}
+        {item['description'].length > 100 ? item['description'].substring(0, 100) + ' ...' : item['description']}
       </p>
       <button onClick={() => showDetails()} className="button">View Details</button>
     </div>

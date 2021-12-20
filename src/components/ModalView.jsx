@@ -32,7 +32,7 @@ const ModalView = ({ selectedCampaign, isDetails, modalIsOpen, closeModal }) => 
             <button style={{ border: 0, backgroundColor: '#fff', fontSize: 18 }} onClick={closeModal}>X</button>
         </div>
         <h2 className="heading"> {isDetails ? "View Details" : "Create Campaign"}</h2>
-        {isDetails ? <Details campaign={selectedCampaign} /> : <CreateCampaign />}
+        {isDetails ? <Details campaign={selectedCampaign} /> : <CreateCampaign closeModal={closeModal} />}
     </Modal>;
 }
 

@@ -1,14 +1,48 @@
 import React, { useState } from "react";
+import { useMoralis } from "react-moralis";
+import Web3 from "web3";
+
+import { CONTRACT_ADDRESS } from "../credentials";
+import abi from "./../abi/abi.json"
 
 import "./campaign.css";
 
-const CreateCampaign = ({ modalIsOpen, closeModal }) => {
+const CreateCampaign = ({ closeModal }) => {
+
+    const { Moralis } = useMoralis();
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [imageURL, setImageURL] = useState("");
     const [associatedLink, setAssociatedLink] = useState("");
     const [targetAmount, setTargetAmount] = useState(0.0);
+    const [campaign, setCampaign] = useState(null);
+
+    const createCamp = async () => {
+        await Moralis.enableWeb3();
+        const options = {
+            contractAddress: CONTRACT_ADDRESS,
+            functionName: "createCampaign",
+            abi: abi,
+            params: {
+                _title: title,
+                _description: description,
+                _targetAmount: Web3.utils.toWei(targetAmount, 'ether'),
+                _image: imageURL,
+                _link: associatedLink,
+            }
+        };
+        try {
+            const receipt = await Moralis.executeFunction(options);
+            if (receipt !== undefined) {
+                console.log(receipt['events']['campaignCreation']['returnValues'])
+                closeModal()
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     return <div className="dataForm">
         <input value={title} onChange={(e) => setTitle(e.target.value)} className="textfield" placeholder="Title" />
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="textfield" placeholder="Description" />
@@ -16,7 +50,7 @@ const CreateCampaign = ({ modalIsOpen, closeModal }) => {
         <input value={associatedLink} onChange={(e) => setAssociatedLink(e.target.value)} className="textfield" placeholder="Associated Link" />
         <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(e.target.value)} className="textfield" />
         <p style={{ marginLeft: 10 }} className="donationTitle">Target Amount (in ETH): {targetAmount}</p>
-        <button className="button">Submit</button>
+        <button onClick={() => createCamp()} className="button">Submit</button>
     </div>;
 }
 

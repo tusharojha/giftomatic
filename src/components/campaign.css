@@ -24,6 +24,7 @@ input, textarea {
 }
 
 textarea {
+    white-space: pre-wrap;
     height: 80px;
 }
 

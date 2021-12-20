@@ -29,28 +29,30 @@ const Dashboard = () => {
 
   function closeModal() {
     setIsOpen(false);
+    loadAllCampaigns()
+  }
+
+  const loadAllCampaigns = async () => {
+    await Moralis.enableWeb3();
+    const options = {
+      contractAddress: CONTRACT_ADDRESS,
+      functionName: "getAllCampaigns",
+      abi: abi,
+      params: {
+        owner: user.get('ethAddress')
+      }
+    };
+    try {
+
+      const receipt = await Moralis.executeFunction(options);
+      if (receipt !== undefined)
+        setCampaigns(receipt)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
-    const loadAllCampaigns = async () => {
-      await Moralis.enableWeb3();
-      const options = {
-        contractAddress: CONTRACT_ADDRESS,
-        functionName: "getAllCampaigns",
-        abi: abi,
-        params: {
-          owner: user.get('ethAddress')
-        }
-      };
-      try {
-
-        const receipt = await Moralis.executeFunction(options);
-        if (receipt !== undefined)
-          setCampaigns(receipt)
-      } catch (e) {
-        console.log(e);
-      }
-    }
     loadAllCampaigns()
   }, [])
 
