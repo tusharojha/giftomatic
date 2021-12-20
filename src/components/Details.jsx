@@ -15,7 +15,7 @@ const Details = ({ selectedId, campaign, closeModal }) => {
         <h5 className="donationTitle">{campaign['title']}
             {completed ? <div className="status completed">Completed</div> : <div className="status running">Running</div>}
             <button className="button" onClick={() => {
-                navigator.clipboard.writeText(window.location.href + user.get('ethAddress') + '/' + selectedId + 1);
+                navigator.clipboard.writeText(window.location.href + user.get('ethAddress') + '/' + (selectedId + 1));
                 toast('Link copied to clipboard');
                 closeModal()
             }}>Share Link</button>

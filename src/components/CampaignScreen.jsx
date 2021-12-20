@@ -98,7 +98,7 @@ const DonateScreen = ({ campaign, refresh }) => {
 
     return <div>
         <h1 className="donationTitle">{campaign['title']}
-            {completed ? <div className="status completed">Completed</div> : <div style={{ fontSize: '12px' }} className="status running">Running</div>}
+            {completed ? <div style={{ fontSize: '12px' }} className="status completed">Completed</div> : <div style={{ fontSize: '12px' }} className="status running">Running</div>}
         </h1>
         <Progressbar bgcolor="red" progress={progress} height={25} />
         <h4 className="heading">{Web3.utils.fromWei(campaign['collectedAmount'], 'ether')} ETH collected out of {Web3.utils.fromWei(campaign['targetAmount'])} ETH target.</h4>
