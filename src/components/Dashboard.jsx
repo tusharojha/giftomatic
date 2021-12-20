@@ -8,7 +8,7 @@ import "./dashboard.css";
 import ModalView from "./ModalView";
 import abi from "../abi/abi.json";
 import { toast } from "react-toastify";
-import { CONTRACT_ADDRESS } from "../credentials";
+import { CONTRACT_ADDRESS } from "../config";
 
 const Dashboard = () => {
   const { user, logout, Moralis } = useMoralis();

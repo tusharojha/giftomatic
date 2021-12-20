@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import Web3 from "web3";
 
-import { CONTRACT_ADDRESS } from "../credentials";
+import { CONTRACT_ADDRESS } from "../config";
 import abi from "./../abi/abi.json"
 
 import "./campaign.css";

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import Progressbar from "./ProgressBar";
 import abi from "./../abi/abi.json";
-import { CONTRACT_ADDRESS } from "../credentials";
+import { CONTRACT_ADDRESS } from "../config";
 
 const CampaignScreen = () => {
 

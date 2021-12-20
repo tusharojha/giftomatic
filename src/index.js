@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./credentials.js";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./config.js";
 
 import { MoralisProvider } from 'react-moralis';
 import { ToastContainer } from "react-toastify";
