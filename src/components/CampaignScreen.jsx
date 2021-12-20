@@ -106,7 +106,7 @@ const DonateScreen = ({ campaign, refresh }) => {
             {campaign['description']}
         </p>
         <a className="link" href={campaign['manualLink']}>Associated Link</a><br /> <br />
-        <img height={200} width={200} src={campaign['image']} /> <br />
+        <img alt="" height={200} width={200} src={campaign['image']} /> <br />
         <p style={{ fontFamily: 'Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif' }}> Enter amount to donate in ETH: </p><input value={amount} onChange={(e) => setAmount(e.target.value)} type="number" className="textfield" />
         <button className="button" onClick={() => donate()}>Donate</button>
     </div>;

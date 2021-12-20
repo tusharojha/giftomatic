@@ -25,7 +25,7 @@ const Details = ({ selectedId, campaign, closeModal }) => {
         <p className="donationDescription">
             {campaign['description']}
         </p>
-        <img height={200} width={200} src={campaign['image']} />
+        <img alt="" height={200} width={200} src={campaign['image']} />
         <a className="link" href={campaign['manualLink']}>Associated Link</a>
     </div>;
 }

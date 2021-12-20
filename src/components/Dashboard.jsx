@@ -21,17 +21,6 @@ const Dashboard = () => {
 
   Modal.setAppElement('body');
 
-  function openModal(state, data) {
-    setSelectedCampaign(data);
-    setShowDetailsModal(state);
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-    loadAllCampaigns()
-  }
-
   const loadAllCampaigns = async () => {
     await Moralis.enableWeb3();
     const options = {
@@ -43,7 +32,6 @@ const Dashboard = () => {
       }
     };
     try {
-
       const receipt = await Moralis.executeFunction(options);
       if (receipt !== undefined)
         setCampaigns(receipt)
@@ -51,6 +39,17 @@ const Dashboard = () => {
       console.log(e);
       toast('Unable to connect with Network!');
     }
+  }
+  
+  function openModal(state, data) {
+    setSelectedCampaign(data);
+    setShowDetailsModal(state);
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    loadAllCampaigns()
   }
 
   useEffect(() => {
@@ -84,7 +83,7 @@ const Dashboard = () => {
         </div>
         <br />
         <div className="items">
-          {campaigns.length == 0 ? <div style={{ marginLeft: 5 }}><h3 className="heading">No Campaigns</h3></div> : campaigns.map((item, index) => {
+          {campaigns.length === 0 ? <div style={{ marginLeft: 5 }}><h3 className="heading">No Campaigns</h3></div> : campaigns.map((item, index) => {
             return <Item key={index} item={item} showDetails={() => {
               setSelectedId(index);
               openModal(true, item);

@@ -16,7 +16,6 @@ const CreateCampaign = ({ closeModal }) => {
     const [imageURL, setImageURL] = useState("");
     const [associatedLink, setAssociatedLink] = useState("");
     const [targetAmount, setTargetAmount] = useState(0.0);
-    const [campaign, setCampaign] = useState(null);
 
     const createCamp = async () => {
         await Moralis.enableWeb3();
