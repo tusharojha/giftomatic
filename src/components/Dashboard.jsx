@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import "./dashboard.css";
 import ModalView from "./ModalView";
 import abi from "../abi/abi.json";
-// import CreateCampaign from "./CreateCampaign";
+import { toast } from "react-toastify";
 import { CONTRACT_ADDRESS } from "../credentials";
 
 const Dashboard = () => {
@@ -49,6 +49,7 @@ const Dashboard = () => {
         setCampaigns(receipt)
     } catch (e) {
       console.log(e);
+      toast('Unable to connect with Network!');
     }
   }
 
@@ -83,7 +84,7 @@ const Dashboard = () => {
         </div>
         <br />
         <div className="items">
-          {campaigns.map((item, index) => {
+          {campaigns.length == 0 ? <div style={{ marginLeft: 5 }}><h3 className="heading">No Campaigns</h3></div> : campaigns.map((item, index) => {
             return <Item key={index} item={item} showDetails={() => {
               setSelectedId(index);
               openModal(true, item);
