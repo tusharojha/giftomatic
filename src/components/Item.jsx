@@ -1,6 +1,6 @@
 import "./item.css";
 
-export const Item = ({ item, showDetails }) => {
+export const Item = ({ item, showDetails, isMe }) => {
   const completed = (parseInt(item['targetAmount']) <= parseInt(item['collectedAmount']));
   return (
     <div className="itemTile">
@@ -10,7 +10,7 @@ export const Item = ({ item, showDetails }) => {
       <p className="donationDescription">
         {item['description'].length > 100 ? item['description'].substring(0, 100) + ' ...' : item['description']}
       </p>
-      <button onClick={() => showDetails()} className="button">View Details</button>
+      <button onClick={() => showDetails()} className="button">{isMe ? 'View Details' : 'Donate'}</button>
     </div>
   );
 };

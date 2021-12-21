@@ -14,17 +14,16 @@ function App() {
 
   const { isAuthenticated } = useMoralis();
 
-  return <Router>
+  return !isAuthenticated ? <Home /> : <Router>
     <Switch>
       <Route path={`/:userToken/:id`}>
-        {isAuthenticated ? <CampaignScreen /> : (
-          <Home />
-        )}
+        <CampaignScreen />
+      </Route>
+      <Route path={`/:userToken`}>
+        <Dashboard otherUser={true} />
       </Route>
       <Route path="/">
-        {isAuthenticated ? <Dashboard /> : (
-          <Home />
-        )}
+        <Dashboard otherUser={false} />
       </Route>
     </Switch>
   </Router>;

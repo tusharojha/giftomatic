@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Progressbar from "./ProgressBar";
 import abi from "./../abi/abi.json";
 import { CONTRACT_ADDRESS } from "../config";
+import Header from "./Header";
 
 const CampaignScreen = () => {
 
@@ -45,19 +46,7 @@ const CampaignScreen = () => {
     }, [])
 
     return <div className="container">
-        <div className="navbar">
-            <div className="logo">
-                <a href="/">GiftoMatic</a>
-            </div>
-            <div className="userDetails">
-                <h5>{user.get('ethAddress')}</h5>
-                <button className="button" onClick={async () => {
-                    logout()
-                }}>
-                    Logout
-                </button>
-            </div>
-        </div>
+        <Header />
         {error !== '' ? error : loading ? <h2 className="heading">Loading...</h2> : <DonateScreen refresh={() => fetchCampaign()} campaign={campaign} />}
     </div>
 }
