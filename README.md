@@ -1,5 +1,6 @@
 # GiftoMatic
-Donate . Help . Gift a Matic for the cause.
+
+![GiftoMatic](./giftomatic.png)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e1fcd84c-45c3-4419-a0b4-e13ced9ca321/deploy-status)](https://app.netlify.com/sites/giftomatic/deploys)
 
