@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+}
+
+.button {
+    background-color: crimson; /* Green */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.navbar {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    align-items: left;
+}
+
+.logo p {
+    margin: 0;
+}
+
+.logo a {
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #000;
+    font-size: 28px;
+}
+
+.list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title button {
+    margin-left: 15px;
+}
+
+.userDetails {
+    display: flex;
+}
+
+.userDetails h5 {
+    font-size: medium;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: 48% 48%;
+}
+
+@media screen and (max-width: 720px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .userDetails {
+        flex-direction: column;
+    }
+
+    .items {
+        grid-template-columns: 100%;
+    }
+    .logo {
+        align-items: center;
+    }
+}

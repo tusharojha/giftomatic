@@ -1,0 +1,40 @@
+.crossButton {
+    display: flex;
+    flex: 1;
+    justify-content: right;
+    margin: 0;
+}
+
+.textfield {
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.dataForm {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: left;
+}
+
+input, textarea {
+    margin: 5px;
+}
+
+textarea {
+    white-space: pre-wrap;
+    height: 80px;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.left {
+    justify-content: left;
+    align-items: flex-start;
+}
