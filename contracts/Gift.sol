@@ -1,6 +1,7 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.11;
 
-pragma solidity >=0.7.0 <0.9.0;
+import "./GiftToken.sol";
 
 contract Gift {
     struct Campaign {
@@ -9,52 +10,97 @@ contract Gift {
         uint256 targetAmount;
         uint256 collectedAmount;
         string image;
-        string manualLink;
+        string externalLink;
     }
-    
-    mapping(address => Campaign[]) addressCampaignMap;
 
-    event campaignCreation(address indexed _owner, uint256 indexed _id);
+    mapping(address => Campaign[]) private campaigns;
 
-    function createCampaign(string calldata _title, string calldata _description, uint256 _targetAmount, string calldata _image, string memory _link) public {
-        Campaign memory _event = Campaign(
+    GiftToken private token;
+
+    event CampaignCreated(
+        address indexed creator,
+        string title,
+        string description,
+        uint256 targetAmount,
+        uint256 collectedAmount,
+        string image,
+        string externalLink
+    );
+
+    constructor(GiftToken _token) {
+        token = _token;
+    }
+
+    function createCampaign(
+        string calldata _title,
+        string calldata _description,
+        uint256 _targetAmount,
+        string calldata _image,
+        string calldata _externalLink
+    ) public {
+        require(_targetAmount > 0, "Target amount should be greater than 0");
+
+        Campaign memory newCampaign = Campaign(
             _title,
             _description,
             _targetAmount,
             0,
             _image,
-            _link
+            _externalLink
         );
-        addressCampaignMap[msg.sender].push(_event);
-        emit campaignCreation(msg.sender, addressCampaignMap[msg.sender].length);
-    }
 
-    function viewCampaign(address owner, uint256 _id) public view returns (Campaign memory _event) {
-        return addressCampaignMap[owner][_id - 1];
-    }
-
-    function getAllCampaigns(address owner) public view returns (Campaign[] memory _campaigns) {
-        return addressCampaignMap[owner];
-    }
-
-    function getCampaignCount(address owner) public view returns (uint256) {
-        return addressCampaignMap[owner].length;
-    }
-
-    function addGift(address owner, uint256 _id) payable public {
-        Campaign memory _event = addressCampaignMap[owner][_id - 1];
-        require(_id <= addressCampaignMap[owner].length, "Not a valid campaign");
-        require(_event.collectedAmount < _event.targetAmount, "Campaign is compeleted.");
-        (bool sent, ) = owner.call{value: msg.value}("");
-        require(sent, "Unable to donate");
-        Campaign memory _tempEvent = Campaign(
-        _event.title,
-        _event.description,
-        _event.targetAmount,
-        _event.collectedAmount + msg.value,
-        _event.image,
-        _event.manualLink
+        campaigns[msg.sender].push(newCampaign);
+        emit CampaignCreated(
+            msg.sender,
+            _title,
+            _description,
+            _targetAmount,
+            0,
+            _image,
+            _externalLink
         );
-        addressCampaignMap[owner][_id - 1] = _tempEvent;
+    }
+
+    function getCampaignsByCreator(address _creator)
+        public
+        view
+        returns (Campaign[] memory)
+    {
+        return campaigns[_creator];
+    }
+
+    function getCampaign(address _creator, uint256 index)
+        public
+        view
+        returns (Campaign memory)
+    {
+        require(campaigns[_creator].length != 0, "No campaigns found");
+        require(index < campaigns[_creator].length, "Index out of bounds");
+        return campaigns[_creator][index];
+    }
+
+    function gift(address _creator, uint256 index) public payable {
+        require(msg.sender != _creator, "You cannot gift to yourself");
+        require(campaigns[_creator].length != 0, "No campaigns found");
+        require(index < campaigns[_creator].length, "Index out of bounds");
+
+        Campaign memory campaign = campaigns[_creator][index];
+
+        require(
+            campaign.collectedAmount + msg.value < campaign.targetAmount,
+            "Campaign is already reached it's target amount."
+        );
+
+        require(
+            msg.value <= campaign.targetAmount - campaign.collectedAmount,
+            "Donation is larger than the remaining target amount."
+        );
+
+        (bool success, ) = _creator.call{value: msg.value}("");
+        require(success, "Failed to transfer gift amount");
+        campaign.collectedAmount += msg.value;
+
+        campaigns[_creator][index] = campaign;
+        token.mint(msg.sender, msg.value);
     }
 }
